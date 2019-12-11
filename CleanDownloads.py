@@ -1,34 +1,37 @@
-import os
 from os import listdir
-from os.path import isfile, join
-from os import walk
 import shutil
+import getpass
 import glob, os
 
-#Path in which we are looking to clean up random files
-basepath = 'C:/Users/Ryan/Downloads/'    
 
-#Image file types and new directory for them
-imgs_path = 'C:/Users/Ryan/Downloads/Images'
+#Get name of current user
+username = os.getlogin()
+
+#Path in which we are looking to clean up random files
+basepath = 'C:/Users/' + username + '/Downloads'    
+
+#Image file types we're looking for 
 imgs = ['*.jpg', '*.jpeg', '*.jpe', '*.jif', '*.jfif','*.jfi', '*.png',
     '*.gif', '*.webp', '*.tiff', '*.psd', '*.raw', '*.bmp', '*.heif',
     '*.indd', '*.svg', '*.ai', '*.eps', '*.tif']
+#New folder in which we will move these files types to
+imgs_path = basepath + '/Images'
 
 #Compressed file types and new directory for them
-zips_path = 'C:/Users/Ryan/Downloads/ZIP'
-zips = ['*.zip', '*.7z', '*.jar']
+zips = ['*.zip', '*.7z', '*.jar', '*.rar']
+zips_path = basepath + '/ZIP'
 
 #Exe file types and new directory for them
-exe_path = 'C:/Users/Ryan/Downloads/EXEs'
 exes = ['*.exe']
+exe_path = basepath + '/EXEs'
 
 #Doc file types and new directory for them
-docs_path = 'C:/Users/Ryan/Downloads/Docs'
 docs = ['*.doc', '*.txt', '*.docx', '*.log']
+docs_path = basepath + '/Docs'
 
 #Audio file types and new directory for them
-audio_path = 'C:/Users/Ryan/Downloads/Music'
 audios = ['*.m4a', '*.wav', '*.mp3']
+audio_path = basepath + '/Music'
 
 #Function to handle path creation and moving of files
 def file_to_path(files, src, destination):
@@ -41,26 +44,9 @@ def file_to_path(files, src, destination):
                     os.makedirs(destination)
                 shutil.move(join(src, file), destination)
 
+#Run function to move files to their paths
 file_to_path(imgs, basepath, imgs_path)
 file_to_path(zips, basepath, zips_path)
 file_to_path(exes, basepath, exe_path)
 file_to_path(docs, basepath, docs_path)
 file_to_path(audios, basepath, audio_path)
-
-
-
-
-
-
-
-
-#for i in imgs:
- #   for file in glob.glob(i):
-  #      print(file)
-   #     shutil.move(join(basepath, file), imgs_path)"""
-    
-    #for file in glob.glob("*.jpg" or "*.zip"):
-     #   print(file)
-        
-
-    #return False
