@@ -2,6 +2,7 @@ from os import listdir
 import shutil
 import getpass
 import glob, os
+import os
 
 
 #Get name of current user
@@ -26,12 +27,15 @@ exes = ['*.exe']
 exe_path = basepath + '/EXEs'
 
 #Doc file types and new directory for them
-docs = ['*.doc', '*.txt', '*.docx', '*.log']
+docs = ['*.doc', '*.txt', '*.docx', '*.log', '*.xlsx', '*.pdf']
 docs_path = basepath + '/Docs'
 
 #Audio file types and new directory for them
 audios = ['*.m4a', '*.wav', '*.mp3']
 audio_path = basepath + '/Music'
+
+vids = ['*.mpeg4', '*.mp4']
+vids_path = basepath + '/Videos'
 
 #Function to handle path creation and moving of files
 def file_to_path(files, src, destination):
@@ -42,7 +46,7 @@ def file_to_path(files, src, destination):
             if len(file) > 0:
                 if not os.path.exists(destination):
                     os.makedirs(destination)
-                shutil.move(join(src, file), destination)
+                shutil.move(os.path.join(src, file), destination)
 
 #Run function to move files to their paths
 file_to_path(imgs, basepath, imgs_path)
@@ -50,3 +54,4 @@ file_to_path(zips, basepath, zips_path)
 file_to_path(exes, basepath, exe_path)
 file_to_path(docs, basepath, docs_path)
 file_to_path(audios, basepath, audio_path)
+file_to_path(vids, basepath, vids_path)
